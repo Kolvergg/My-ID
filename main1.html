@@ -1,6 +1,27 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+      <style>
+    /* Page fade-in */
+    body {
+        opacity: 0;
+        transition: opacity 0.5s ease;
+    }
+    body.fade-in {
+        opacity: 1;
+    }
+
+    /* Slider content slide-up fade-in */
+    .slider-content {
+        opacity: 0;
+        transform: translateY(20px);
+        transition: opacity 0.5s ease, transform 0.5s ease;
+    }
+    .slider-content.show {
+        opacity: 1;
+        transform: translateY(0);
+    }
+</style>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>View Details</title>
@@ -162,5 +183,19 @@
             window.location.href = 'index.html' ;
         });
     </script>
+        <script>
+document.addEventListener("DOMContentLoaded", () => {
+    // Fade in the whole page
+    document.body.classList.add("fade-in");
+
+    // Animate slider-content elements sequentially
+    const sliders = document.querySelectorAll(".slider-content");
+    sliders.forEach((slider, index) => {
+        setTimeout(() => {
+            slider.classList.add("show");
+        }, index * 150); // stagger animation
+    });
+});
+</script>
 </body>
 </html>
