@@ -124,19 +124,20 @@
         <div class="header-title">View Details</div>
     </div>
 <!-- Live refresh time -->
-<div style="
-    font-family:-apple-system, sans-serif;
-    font-size:11px;
-    color:#777;
-    text-align:center;
-    padding:8px 12px;
-    background:white;
+<div id="refresh-box" style="
+    background:#ffffff;
     border-radius:10px;
-    width:65%;
-    margin:12px auto;
+    padding:6px 10px;
+    width:60%;
+    margin:10px auto;
+    text-align:center;
 ">
-    <strong id="refresh-time"></strong>
-</div>
+    <strong id="refresh-time" style="
+        font-family:-apple-system, sans-serif;
+        font-size:10px;
+        color:#777;
+        font-weight:500;
+    "></strong>
 </div>
     <div class="content">
         <div class="page active" id="permit-page">
@@ -177,36 +178,30 @@
         });
     </script>
     <script>
-// Display the time the page was loaded
+        // Refresh timestamp box
 function updateRefreshTime() {
     const now = new Date();
-    const formatted = now.toLocaleString('en-AU', {
-        weekday: 'long',
-        year: 'numeric',
-        month: 'long',
-        day: 'numeric',
-        hour: '2-digit',
-        minute: '2-digit',
-        second: '2-digit'
-    });
-   // Format time like "1:47 am"
-let hours = now.getHours();
-let minutes = now.getMinutes();
-let ampm = hours >= 12 ? "pm" : "am";
-hours = hours % 12;
-hours = hours ? hours : 12; 
-minutes = minutes < 10 ? minutes : minutes; 
 
-let cleanTime = `${hours}:${minutes}${ampm}`;
-let cleanDate = `${day}/${month}/${year}`;
+    // Date
+    const day = String(now.getDate()).padStart(2, '0');
+    const month = String(now.getMonth() + 1).padStart(2, '0');
+    const year = now.getFullYear();
 
-document.getElementById('refresh-time').textContent =
-    `Last refreshed: ${cleanDate} • ${cleanTime}`;
-});
+    // Time format: 1:47am
+    let hours = now.getHours();
+    let minutes = now.getMinutes();
+    let ampm = hours >= 12 ? "pm" : "am";
+    hours = hours % 12;
+    hours = hours ? hours : 12;
 
-// Init
+    const cleanTime = `${hours}:${minutes < 10 ? "0" + minutes : minutes}${ampm}`;
+    const cleanDate = `${day}/${month}/${year}`;
+
+    document.getElementById('refresh-time').textContent =
+        `Last refreshed: ${cleanDate} • ${cleanTime}`;
+}
+
 updateRefreshTime();
-setInterval(updateLifeTimer, 1000);
-</script>
+    </script>
 </body>
 </html>
