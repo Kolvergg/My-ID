@@ -11,6 +11,26 @@
             box-sizing: border-box;
         }
 
+#refresh-box {
+    background: rgba(255,255,255,0.9);
+    padding: 6px 10px;
+    border-radius: 8px;
+    width: fit-content;
+    margin: 10px auto;
+    font-family: -apple-system, sans-serif;
+    font-size: 11px;
+    color: #444;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.08);
+}
+
+#refresh-box .label {
+    font-weight: 700; /* ONLY bold this */
+}
+
+#refresh-time {
+    font-weight: 400;
+}
+        
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background-color: #f5f5f5;
@@ -124,21 +144,9 @@
         <div class="header-title">View Details</div>
     </div>
 <!-- Live refresh time -->
-<div id="refresh-box" style="
-    background:#ffffff;
-    border-radius:10px;
-    padding:6px 12px;
-    width:70%;
-    margin:12px auto;
-    text-align:center;
-    box-shadow:0 1px 3px rgba(0,0,0,0.1);
-">
-    <span id="refresh-time" style="
-        font-family:-apple-system, sans-serif;
-        font-size:11px;
-        color:#333;
-        font-weight:600;
-    "></span>
+<div id="refresh-box">
+    <span class="label">Last refreshed:</span>
+    <span id="refresh-time"></span>
 </div>
     <div class="content">
         <div class="page active" id="permit-page">
@@ -174,39 +182,29 @@
     </div>
 
     <script>
-        document.querySelector('.back-arrow').addEventListener('click', function() {
-            window.location.href = 'index.html' ;
-        });
-    </script>
-    <script>
-   function updateRefreshTime() {
+        function updateRefreshTime() {
     const now = new Date();
 
-    // Day of week
     const weekdays = ["Sun","Mon","Tue","Wed","Thu","Fri","Sat"];
     const weekday = weekdays[now.getDay()];
 
-    // Day number
     const day = now.getDate();
 
-    // Month short
     const months = ["Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"];
     const month = months[now.getMonth()];
 
-    // Year
     const year = now.getFullYear();
 
-    // Time — 1:47am style
     let hours = now.getHours();
     let minutes = now.getMinutes();
     let ampm = hours >= 12 ? "pm" : "am";
     hours = hours % 12 || 12;
     const time = `${hours}:${minutes < 10 ? "0" + minutes : minutes}${ampm}`;
 
-    // Final format: Mon / 12 / Dec / 2025 / 1:47am
-    const formatted = `${weekday} / ${day} / ${month} / ${year} / ${time}`;
+    // No slashes — clean format
+    const formatted = `${weekday} ${day} ${month} ${year} ${time}`;
 
-    document.getElementById('refresh-time').textContent = `Last refreshed: ${formatted}`;
+    document.getElementById("refresh-time").textContent = formatted;
 }
 
 updateRefreshTime();
