@@ -124,8 +124,19 @@
         <div class="header-title">View Details</div>
     </div>
 <!-- Live refresh time -->
-<div style="font-family:-apple-system, sans-serif; font-size:13px; padding:10px 15px; background:white; border-radius:8px; width:90%; margin:10px auto;">
+<div style="
+    font-family:-apple-system, sans-serif;
+    font-size:11px;
+    color:#777;
+    text-align:center;
+    padding:8px 12px;
+    background:white;
+    border-radius:10px;
+    width:65%;
+    margin:12px auto;
+">
     <strong id="refresh-time"></strong>
+</div>
 </div>
     <div class="content">
         <div class="page active" id="permit-page">
@@ -178,7 +189,19 @@ function updateRefreshTime() {
         minute: '2-digit',
         second: '2-digit'
     });
-    document.getElementById('refresh-time').textContent = "Page refreshed: " + formatted;
+   // Format time like "1:47 am"
+let hours = now.getHours();
+let minutes = now.getMinutes();
+let ampm = hours >= 12 ? "pm" : "am";
+hours = hours % 12;
+hours = hours ? hours : 12; 
+minutes = minutes < 10 ? minutes : minutes; 
+
+let cleanTime = `${hours}:${minutes}${ampm}`;
+let cleanDate = `${day}/${month}/${year}`;
+
+document.getElementById('refresh-time').textContent =
+    `Last refreshed: ${cleanDate} • ${cleanTime}`;
 });
 
 // Init
