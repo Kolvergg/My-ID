@@ -124,10 +124,9 @@
         <div class="header-title">View Details</div>
     </div>
 <!-- Live refresh time -->
-<div id="refresh-time" style="font-family:-apple-system, sans-serif; font-size:13px; padding:10px 15px;"></div>
-
-<!-- Life timer -->
-<div id="life-timer" style="font-family:-apple-system, sans-serif; font-size:13px; padding:0px 15px 10px;"></div>
+<div style="font-family:-apple-system, sans-serif; font-size:13px; padding:10px 15px; background:white; border-radius:8px; width:90%; margin:10px auto;">
+    <strong id="refresh-time"></strong>
+</div>
     <div class="content">
         <div class="page active" id="permit-page">
             <div class="image-container">
@@ -180,22 +179,6 @@ function updateRefreshTime() {
         second: '2-digit'
     });
     document.getElementById('refresh-time').textContent = "Page refreshed: " + formatted;
-}
-
-// Life timer counting seconds since last click
-let lifeSeconds = 0;
-const lifeDisplay = document.getElementById('life-timer');
-
-function updateLifeTimer() {
-    lifeSeconds++;
-    const mins = String(Math.floor(lifeSeconds / 60)).padStart(2, '0');
-    const secs = String(lifeSeconds % 60).padStart(2, '0');
-    lifeDisplay.textContent = `Time since last click: ${mins}:${secs}`;
-}
-
-// Reset life timer on any click
-document.addEventListener('click', () => {
-    lifeSeconds = 0;
 });
 
 // Init
