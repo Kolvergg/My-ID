@@ -62,31 +62,35 @@ document.querySelector('a[data-transition="slide-left"]').addEventListener('clic
     setTimeout(() => window.location.href = target, 500);
 });
     </script>
+<div class="content" id="content">
+    <!-- Your homepage content here -->
+</div>
+
 <script>
-  // Select the content container
-  const content = document.querySelector('.content');
+const content = document.getElementById('content');
 
-  // Start off-screen to the right
-  content.style.transform = 'translateX(100%)';
-  content.style.transition = 'transform 0.5s ease';
-
-  // Trigger slide-in on next tick to ensure browser registers the initial position
-  requestAnimationFrame(() => {
+// INITIAL IN ANIMATION (slide from right)
+content.style.transform = 'translateX(100%)';
+content.style.transition = 'transform 0.5s ease';
+requestAnimationFrame(() => {
     content.style.transform = 'translateX(0)';
-  });
+});
 
-  // Slide out when any link is clicked
-  document.querySelectorAll('a').forEach(link => {
+// OUT ANIMATION FOR LINKS
+document.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', e => {
-      e.preventDefault(); // stop instant navigation
-      const href = link.getAttribute('href');
+        e.preventDefault();
+        const href = link.getAttribute('href');
 
-      content.style.transform = 'translateX(-100%)';
-      setTimeout(() => {
-        window.location.href = href;
-      }, 500); // match transition duration
+        // Slide out to left
+        content.style.transform = 'translateX(-100%)';
+
+        // Navigate after animation
+        setTimeout(() => {
+            window.location.href = href;
+        }, 500); // matches transition duration
     });
-  });
+});
 </script>
 </body>
 </html>
