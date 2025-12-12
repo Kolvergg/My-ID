@@ -63,24 +63,35 @@ document.querySelector('a[data-transition="slide-left"]').addEventListener('clic
 });
     </script>
 <script>
-document.querySelectorAll('a[href="main1.html"]').forEach(link => {
-    link.addEventListener('click', function(e) {
-        e.preventDefault();
-        document.body.style.transition = 'transform 0.5s ease';
-        document.body.style.transform = 'translateX(-100vw)';
-        setTimeout(() => {
-            window.location.href = 'main1.html';
-        }, 500);
+document.addEventListener("DOMContentLoaded", function() {
+    const body = document.body;
+
+    // Slide in from right on page load
+    body.style.transform = "translateX(100%)";
+    body.style.opacity = "0";
+    body.style.transition = "transform 0.5s ease, opacity 0.5s ease";
+
+    requestAnimationFrame(() => {
+        body.style.transform = "translateX(0)";
+        body.style.opacity = "1";
     });
-</script>
-    <script>
-document.querySelectorAll('.back-arrow').forEach(arrow => {
-    arrow.addEventListener('click', function() {
-        document.body.style.transition = 'transform 0.5s ease';
-        document.body.style.transform = 'translateX(100vw)';
-        setTimeout(() => {
-            window.location.href = 'index.html';
-        }, 500);
+
+    // Slide out to right when clicking any link
+    document.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', function(e) {
+            const href = this.getAttribute('href');
+            if (!href || href.startsWith('#')) return;
+            e.preventDefault();
+
+            // Slide out
+            body.style.transform = "translateX(100%)";
+            body.style.opacity = "0";
+
+            // Wait for animation then navigate
+            setTimeout(() => {
+                window.location.href = href;
+            }, 500); // match animation duration
+        });
     });
 });
 </script>
