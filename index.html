@@ -68,28 +68,26 @@ document.querySelector('a[data-transition="slide-left"]').addEventListener('clic
 <script>
 const content = document.getElementById('content');
 
-// Slide in from right on page load
+// === Slide IN on page load ===
 content.style.transform = 'translateX(100%)';
 content.style.transition = 'transform 0.5s ease';
-
 requestAnimationFrame(() => {
     content.style.transform = 'translateX(0)';
 });
-</script>
-    <script>
+
+// === Slide OUT on link click ===
 document.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', e => {
         e.preventDefault();
         const href = link.getAttribute('href');
 
-        const content = document.getElementById('content');
+        // Slide out to left
         content.style.transform = 'translateX(-100%)';
-        content.style.transition = 'transform 0.5s ease';
 
-        // Wait for animation to finish before navigating
+        // Wait for animation to finish
         setTimeout(() => {
             window.location.href = href;
-        }, 500);
+        }, 500); // matches the transition duration
     });
 });
 </script>
