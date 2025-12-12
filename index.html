@@ -63,37 +63,30 @@ document.querySelector('a[data-transition="slide-left"]').addEventListener('clic
 });
     </script>
 <script>
-document.addEventListener("DOMContentLoaded", function() {
-    const body = document.body;
+  // Select the content container
+  const content = document.querySelector('.content');
 
-    // Slide in from right on page load
-    body.style.transform = "translateX(100%)";
-    body.style.opacity = "0";
-    body.style.transition = "transform 0.5s ease, opacity 0.5s ease";
+  // Start off-screen to the right
+  content.style.transform = 'translateX(100%)';
+  content.style.transition = 'transform 0.5s ease';
 
-    requestAnimationFrame(() => {
-        body.style.transform = "translateX(0)";
-        body.style.opacity = "1";
+  // Trigger slide-in on next tick to ensure browser registers the initial position
+  requestAnimationFrame(() => {
+    content.style.transform = 'translateX(0)';
+  });
+
+  // Slide out when any link is clicked
+  document.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', e => {
+      e.preventDefault(); // stop instant navigation
+      const href = link.getAttribute('href');
+
+      content.style.transform = 'translateX(-100%)';
+      setTimeout(() => {
+        window.location.href = href;
+      }, 500); // match transition duration
     });
-
-    // Slide out to right when clicking any link
-    document.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', function(e) {
-            const href = this.getAttribute('href');
-            if (!href || href.startsWith('#')) return;
-            e.preventDefault();
-
-            // Slide out
-            body.style.transform = "translateX(100%)";
-            body.style.opacity = "0";
-
-            // Wait for animation then navigate
-            setTimeout(() => {
-                window.location.href = href;
-            }, 500); // match animation duration
-        });
-    });
-});
+  });
 </script>
 </body>
 </html>
