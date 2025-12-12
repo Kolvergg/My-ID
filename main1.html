@@ -119,7 +119,7 @@
 </head>
 <body>
     <div class="header">
-        <div class="back-arrow">
+        <div class="back-arrow" data-transition-reverse="slide-right">Close</div>
             <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
                 <polyline points="15 18 9 12 15 6"></polyline>
             </svg>
@@ -164,5 +164,13 @@
             window.location.href = 'index.html';
         });
     </script>
+        <script>
+document.querySelector('.back-arrow[data-transition-reverse="slide-right"]').addEventListener('click', function(e){
+    e.preventDefault();
+    document.body.style.transition = 'transform 0.5s ease';
+    document.body.style.transform = 'translateX(100vw)';
+    setTimeout(() => window.history.back(), 500);
+});
+</script>
 </body>
 </html>
