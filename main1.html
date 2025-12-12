@@ -10,7 +10,21 @@
             padding: 0;
             box-sizing: border-box;
         }
+.invisible-btn {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    background: transparent;
+    border: none;
+    z-index: 9999;
+}
 
+.invisible-btn:hover {
+    background: rgba(255, 255, 255, 0.08); /* tiny visual cue */
+    border-radius: 8px;
+}
         .header {
             position: sticky;
             top: 0;
@@ -157,6 +171,7 @@
             window.location.href = 'index.html';
         });
     </script>
-   
+
+   <a href="your-page.html" class="invisible-btn"></a>
 </body>
 </html>
