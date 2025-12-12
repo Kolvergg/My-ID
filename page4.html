@@ -29,24 +29,15 @@
             justify-content: center;
             box-shadow: 0 2px 4px rgba(0,0,0,0.1);
             z-index: 100;
-        }
-
-        .back-arrow {
-            position: absolute;
-            left: 20px;
-            color: #283442;
-            cursor: pointer;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            width: 32px;
-            height: 32px;
-        }
-
-        .back-arrow svg {
-            width: 24px;
-            height: 24px;
-        }
+            
+      .back-arrow {
+    position: absolute;
+    right: 20px;          /* moved to right */
+    color: #283442;
+    cursor: pointer;
+    font-size: 16px;      /* size of text */
+    font-weight: 500;     /* bold-ish */
+}
 
         .header-title {
             color: #283442;
@@ -107,11 +98,7 @@
 </head>
 <body>
     <div class="header">
-        <div class="back-arrow">
-            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <polyline points="15 18 9 12 15 6"></polyline>
-            </svg>
-        </div>
+        <div class="back-arrow">Close</div>
         <div class="header-title">Verify Licence</div>
     </div>
 
