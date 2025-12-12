@@ -61,14 +61,27 @@ document.querySelector('a[data-transition="slide-left"]').addEventListener('clic
     document.body.style.transform = 'translateX(-100vw)';
     setTimeout(() => window.location.href = target, 500);
 });
+    </script>
+<script>
+document.querySelectorAll('a[href="main1.html"]').forEach(link => {
+    link.addEventListener('click', function(e) {
+        e.preventDefault();
+        document.body.style.transition = 'transform 0.5s ease';
+        document.body.style.transform = 'translateX(-100vw)';
+        setTimeout(() => {
+            window.location.href = 'main1.html';
+        }, 500);
+    });
 </script>
     <script>
-document.querySelector('.back-arrow').addEventListener('click', () => {
-    firstPage.style.transform = 'translateX(100%)';
-    firstPage.style.transition = 'transform 0.5s ease';
-    setTimeout(() => {
-        firstPage.style.display = 'none';
-    }, 500);
+document.querySelectorAll('.back-arrow').forEach(arrow => {
+    arrow.addEventListener('click', function() {
+        document.body.style.transition = 'transform 0.5s ease';
+        document.body.style.transform = 'translateX(100vw)';
+        setTimeout(() => {
+            window.location.href = 'index.html';
+        }, 500);
+    });
 });
 </script>
 </body>
