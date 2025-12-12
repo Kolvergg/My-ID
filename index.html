@@ -65,30 +65,31 @@ document.querySelector('a[data-transition="slide-left"]').addEventListener('clic
 <div class="content" id="content">
     <!-- Your homepage content here -->
 </div>
-
 <script>
 const content = document.getElementById('content');
 
-// INITIAL IN ANIMATION (slide from right)
+// Slide in from right on page load
 content.style.transform = 'translateX(100%)';
 content.style.transition = 'transform 0.5s ease';
+
 requestAnimationFrame(() => {
     content.style.transform = 'translateX(0)';
 });
-
-// OUT ANIMATION FOR LINKS
+</script>
+    <script>
 document.querySelectorAll('a').forEach(link => {
     link.addEventListener('click', e => {
         e.preventDefault();
         const href = link.getAttribute('href');
 
-        // Slide out to left
+        const content = document.getElementById('content');
         content.style.transform = 'translateX(-100%)';
+        content.style.transition = 'transform 0.5s ease';
 
-        // Navigate after animation
+        // Wait for animation to finish before navigating
         setTimeout(() => {
             window.location.href = href;
-        }, 500); // matches transition duration
+        }, 500);
     });
 });
 </script>
