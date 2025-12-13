@@ -82,13 +82,13 @@ a, a:focus, a:active, a:hover {
     z-index: 50;
     text-decoration: none;
     border-radius: 50px;
-    /* FULL mobile tap suppression */
-    -webkit-tap-highlight-color: rgba(0,0,0,0);
-    -webkit-touch-callout: none;
-    -webkit-user-select: none;
+      /* Mobile tap suppression */
+    -webkit-tap-highlight-color: rgba(0,0,0,0); /* removes highlight on tap */
+    -webkit-touch-callout: none; /* prevents callout menu on long press */
+    -webkit-user-select: none; /* prevents text selection */
     user-select: none;
     outline: none;
-    background: transparent;
+    background: transparent; /* ensures no background appears */
 }
 
 /* Button 1: Permit */
