@@ -16,6 +16,26 @@
             background-color: #f5f5f5;
             overflow-x: hidden;
         }
+        body {
+    transform: translateY(100%);
+    animation: slideUpIn 0.35s ease forwards;
+}
+
+@keyframes slideUpIn {
+    to {
+        transform: translateY(0);
+    }
+}
+
+body.slide-down-out {
+    animation: slideDownOut 0.3s ease forwards;
+}
+
+@keyframes slideDownOut {
+    to {
+        transform: translateY(100%);
+    }
+}
 
    .header {
     position: sticky;
@@ -120,5 +140,28 @@
                 window.location.href = 'main1.html';
             });
         </script>
+    <script>
+    function leavePage4(url) {
+        document.body.classList.add('slide-down-out');
+        setTimeout(() => {
+            window.location.href = url;
+        }, 300);
+    }
+
+    // Back arrow
+    document.querySelector('.back-arrow')?.addEventListener('click', () => {
+        leavePage4('index.html');
+    });
+
+    // Any links on page 4
+    document.querySelectorAll('a').forEach(link => {
+        link.addEventListener('click', e => {
+            const href = link.getAttribute('href');
+            if (!href) return;
+            e.preventDefault();
+            leavePage4(href);
+        });
+    });
+</script>
     </body>
     </html>
