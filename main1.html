@@ -195,6 +195,10 @@ body.slide-down-in {
 if (document.referrer.endsWith('page4.html')) {
     document.body.classList.add('slide-down-in');
 }
+            if (sessionStorage.getItem('fromPage4') === 'true') {
+    document.body.classList.add('slide-down-in');
+    sessionStorage.removeItem('fromPage4'); // reset so it doesn't trigger next time
+}
 </script>
         
 </body>
