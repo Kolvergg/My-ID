@@ -9,6 +9,17 @@
             margin: 0;
             padding: 0;
             box-sizing: border-box;}
+        /* Slide in from top */
+body.slide-down-in {
+    transform: translateY(-100%);
+    animation: slideDownIn 0.45s ease forwards;
+}
+
+@keyframes slideDownIn {
+    to {
+        transform: translateY(0);
+    }
+}
 
             a, a:focus, a:active, a:hover {
     outline: none;
@@ -179,6 +190,12 @@
             window.location.href = 'index.html';
         });
     </script>
+        <script>
+// Detect referrer
+if (document.referrer.endsWith('page4.html')) {
+    document.body.classList.add('slide-down-in');
+}
+</script>
         
 </body>
 </html>
