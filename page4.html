@@ -17,8 +17,8 @@ body {
     overflow-x: hidden;
 }
 
-/* Slide animation wrapper */
-#page {
+/* Page slides in from bottom on load */
+body {
     transform: translateY(100%);
     animation: slideUpIn 0.45s ease forwards;
 }
@@ -29,7 +29,8 @@ body {
     }
 }
 
-body.slide-down-out #page {
+/* Page slides down when leaving */
+body.slide-down-out {
     animation: slideDownOut 0.3s ease forwards;
 }
 
@@ -112,28 +113,28 @@ body.slide-down-out #page {
                 window.location.href = 'main1.html';
             });
         </script>
-    <script>
-    function leavePage4(url) {
-        document.body.classList.add('slide-down-out');
-        setTimeout(() => {
-            window.location.href = url;
-        }, 300);
-    }
+   <script>
+function leavePage(url) {
+    document.body.classList.add('slide-down-out');
+    setTimeout(() => {
+        window.location.href = url;
+    }, 300); // match the CSS animation duration
+}
 
-    // Back arrow
-    document.querySelector('.back-arrow')?.addEventListener('click', () => {
-        leavePage4('index.html');
-    });
+// Back arrow
+document.querySelector('.back-arrow')?.addEventListener('click', () => {
+    leavePage('index.html'); // or whichever page it should go back to
+});
 
-    // Any links on page 4
-    document.querySelectorAll('a').forEach(link => {
-        link.addEventListener('click', e => {
-            const href = link.getAttribute('href');
-            if (!href) return;
-            e.preventDefault();
-            leavePage4(href);
-        });
+// All other links
+document.querySelectorAll('a.invisible-button').forEach(link => {
+    link.addEventListener('click', e => {
+        const href = link.getAttribute('href');
+        if (!href) return;
+        e.preventDefault();
+        leavePage(href);
     });
+});
 </script>
     </body>
     </html>
