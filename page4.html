@@ -9,15 +9,16 @@
     margin: 0;
     padding: 0;
     box-sizing: border-box;
-}
-body.slide-up-out {
-    animation: slideUpOut 0.3s ease forwards;
+      }
+body.slide-down-out {
+    animation: slideDownOut 0.3s ease forwards;
 }
 
-@keyframes slideUpOut {
+@keyframes slideDownOut {
     to {
-        transform: translateY(-100%);
+        transform: translateY(100%);
     }
+}
 }
 body {
     font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
@@ -167,5 +168,28 @@ document.querySelectorAll('a').forEach(link => {
     });
 });
 </script>
+   <script>
+      function leavePage4(url) {
+    document.body.classList.add('slide-down-out');
+    setTimeout(() => {
+        window.location.href = url;
+    }, 300); // match the CSS animation duration
+}
+
+// Back arrow
+document.querySelector('.back-arrow')?.addEventListener('click', () => {
+    leavePage4('main1.html');
+});
+
+// Links on Page 4 (optional)
+document.querySelectorAll('a').forEach(link => {
+    link.addEventListener('click', e => {
+        const href = link.getAttribute('href');
+        if (!href) return;
+        e.preventDefault();
+        leavePage4(href);
+    });
+});
+   </script>
     </body>
     </html>
