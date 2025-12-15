@@ -145,29 +145,7 @@ document.querySelectorAll('a.invisible-button').forEach(link => {
     });
 });
 </script>
-   <script>
-   function leavePage4(url) {
-    document.body.classList.add('slide-up-out'); // triggers exit animation
-    setTimeout(() => {
-        window.location.href = url;
-    }, 300); // match CSS animation duration
-}
-
-// Back arrow
-document.querySelector('.back-arrow')?.addEventListener('click', () => {
-    leavePage4('index.html'); 
-});
-
-// Buttons / links
-document.querySelectorAll('a').forEach(link => {
-    link.addEventListener('click', e => {
-        const href = link.getAttribute('href');
-        if (!href) return;
-        e.preventDefault();
-        leavePage4(href);
-    });
-});
-</script>
+ 
    <script>
       function leavePage4(url) {
     document.body.classList.add('slide-down-out');
