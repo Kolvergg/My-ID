@@ -153,20 +153,21 @@ document.querySelectorAll('a.invisible-button').forEach(link => {
 </script>
 <script>
 let timerStarted = false;
-let timeLeft = 120; // 2 minutes in seconds
 let interval;
 
-function startTimer() {
-    if (timerStarted) return;
+function startTimer(duration = 120) { // duration in seconds
     const timerEl = document.getElementById('timer');
-    if (!timerEl) return; // do nothing if element doesn't exist yet
-    timerStarted = true;
+    if (!timerEl || timerStarted) return;
 
-    // Initialize display immediately
+    timerStarted = true;
+    let timeLeft = duration;
+
+    // Show initial time immediately
     timerEl.textContent = `${String(Math.floor(timeLeft / 60)).padStart(2,'0')}:${String(timeLeft % 60).padStart(2,'0')}`;
 
     interval = setInterval(() => {
         timeLeft--;
+
         const minutes = Math.floor(timeLeft / 60);
         const seconds = timeLeft % 60;
 
@@ -179,7 +180,14 @@ function startTimer() {
     }, 1000);
 }
 
-// Start countdown on first click anywhere in the page
+// Reset and prepare the timer on every page load
+window.addEventListener('load', () => {
+    timerStarted = false;      // ensure timer can start fresh
+    const timerEl = document.getElementById('timer');
+    if (timerEl) timerEl.textContent = '02:00'; // initial display
+});
+
+// Start timer on first click anywhere
 document.addEventListener('click', startTimer, { once: true });
 </script>
     </body>
