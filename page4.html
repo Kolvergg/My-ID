@@ -42,7 +42,7 @@ body.slide-down-out {
 
 /* HEADER - KEEP EXACTLY THE SAME */
 .header {
-    position: fixed;
+    position: sticky;
     top: 0;
     left: 0;
     right: 0;
@@ -55,9 +55,6 @@ body.slide-down-out {
     height: auto;
     padding: 15px 0;
     transition: all 0.3s ease;
-}
-.content {
-    padding-top: 70px; /* match header height */
 }
 .back-arrow {
     position: absolute;
@@ -94,15 +91,7 @@ body.slide-down-out {
     height: auto;
     display: block;
 }
-    html, body {
-    overflow-x: hidden;  /* prevent horizontal scrolling */
-    width: 100%;         /* ensure body never exceeds viewport */
-}
-
-.image-container img,
-.invisible-button {
-    max-width: 100%;     /* ensure content doesn’t overflow */
-}
+   
     </style>
 </head>
 <body>
