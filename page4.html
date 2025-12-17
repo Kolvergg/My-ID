@@ -42,7 +42,7 @@ body.slide-down-out {
 
 /* HEADER - KEEP EXACTLY THE SAME */
 .header {
-    position: sticky;
+    position: fixed;
     top: 0;
     left: 0;
     right: 0;
@@ -56,7 +56,9 @@ body.slide-down-out {
     padding: 15px 0;
     transition: all 0.3s ease;
 }
-
+.content {
+    padding-top: 70px; /* match header height */
+}
 .back-arrow {
     position: absolute;
     right: 20px;
