@@ -92,10 +92,15 @@ body.slide-down-out {
     height: auto;
     display: block;
 }
-       body {
-    overflow-x: hidden; /* prevents horizontal scroll */
+    html, body {
+    overflow-x: hidden;  /* prevent horizontal scrolling */
+    width: 100%;         /* ensure body never exceeds viewport */
 }
 
+.image-container img,
+.invisible-button {
+    max-width: 100%;     /* ensure content doesn’t overflow */
+}
     </style>
 </head>
 <body>
@@ -158,40 +163,38 @@ document.querySelectorAll('a.invisible-button').forEach(link => {
 let timerStarted = false;
 let interval;
 
-function startTimer(duration = 120) { // duration in seconds
+function startTimer(duration = 120) {
     const timerEl = document.getElementById('timer');
-    if (!timerEl || timerStarted) return;
+    if (!timerEl) return;
 
-    timerStarted = true;
+    // Reset every time page loads
+    clearInterval(interval);
+    timerStarted = false;
     let timeLeft = duration;
 
-    // Show initial time immediately
+    // Initialize display immediately
     timerEl.textContent = `${String(Math.floor(timeLeft / 60)).padStart(2,'0')}:${String(timeLeft % 60).padStart(2,'0')}`;
 
-    interval = setInterval(() => {
-        timeLeft--;
+    // Start countdown on first click
+    document.addEventListener('click', () => {
+        if (timerStarted) return;
+        timerStarted = true;
 
-        const minutes = Math.floor(timeLeft / 60);
-        const seconds = timeLeft % 60;
-
-        timerEl.textContent = `${String(minutes).padStart(2,'0')}:${String(seconds).padStart(2,'0')}`;
-
-        if (timeLeft <= 0) {
-            clearInterval(interval);
-            timerEl.textContent = '00:00';
-        }
-    }, 1000);
+        interval = setInterval(() => {
+            timeLeft--;
+            const minutes = Math.floor(timeLeft / 60);
+            const seconds = timeLeft % 60;
+            timerEl.textContent = `${String(minutes).padStart(2,'0')}:${String(seconds).padStart(2,'0')}`;
+            if (timeLeft <= 0) {
+                clearInterval(interval);
+                timerEl.textContent = '00:00';
+            }
+        }, 1000);
+    }, { once: true });
 }
 
-// Reset and prepare the timer on every page load
-window.addEventListener('load', () => {
-    timerStarted = false;      // ensure timer can start fresh
-    const timerEl = document.getElementById('timer');
-    if (timerEl) timerEl.textContent = '02:00'; // initial display
-});
-
-// Start timer on first click anywhere
-document.addEventListener('click', startTimer, { once: true });
+// Auto-run on page load
+window.addEventListener('load', () => startTimer());
 </script>
     </body>
     </html>
