@@ -92,15 +92,6 @@ body.slide-down-out {
     height: auto;
     display: block;
 
-#timer {
-    position: absolute;
-    top: 500px;     /* adjust */
-    right: 25px;    /* adjust */
-    font-size: 20px;
-    font-weight: 750;
-    color: black;
-    z-index: 1000;
-}
     </style>
 </head>
 <body>
@@ -112,7 +103,17 @@ body.slide-down-out {
  <div class="image-container">
     <img src="data:image/png;base64,YOUR_BASE64_HERE">
 
-    <div id="timer">02:00</div>
+    <div id="timer" style="
+       position:relative;
+    top: 500px;
+    right: 25px;
+    font-size: 20px;
+    font-weight: 750;
+    color: black;
+      z-index:1000;
+">
+    02:00
+  </div>
 </div>
     <div class="content">
         <div class="image-container">
@@ -153,16 +154,32 @@ document.querySelectorAll('a.invisible-button').forEach(link => {
 });
 </script>
 <script>
-// Countdown timer logic
-let time = 120; // seconds
-const timerEl = document.getElementById('timer');
-const interval = setInterval(() => {
-    const minutes = String(Math.floor(time / 60)).padStart(2,'0');
-    const seconds = String(time % 60).padStart(2,'0');
-    timerEl.textContent = `${minutes}:${seconds}`;
-    if (time === 0) clearInterval(interval);
-    time--;
-}, 1000);
+let timerStarted = false;
+let timeLeft = 120; // 2 minutes in seconds
+let interval;
+
+function startTimer() {
+    if (timerStarted) return;
+    timerStarted = true;
+
+    interval = setInterval(() => {
+        timeLeft--;
+
+        const minutes = Math.floor(timeLeft / 60);
+        const seconds = timeLeft % 60;
+
+        document.getElementById('timer').textContent =
+            `${String(minutes).padStart(2,'0')}:${String(seconds).padStart(2,'0')}`;
+
+        if (timeLeft <= 0) {
+            clearInterval(interval);
+            document.getElementById('timer').textContent = '00:00';
+        }
+    }, 1000);
+}
+
+// start countdown on first click anywhere
+document.addEventListener('click', startTimer, { once: true });
 </script>
     </body>
     </html>
