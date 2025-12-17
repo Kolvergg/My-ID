@@ -158,25 +158,28 @@ let interval;
 
 function startTimer() {
     if (timerStarted) return;
+    const timerEl = document.getElementById('timer');
+    if (!timerEl) return; // do nothing if element doesn't exist yet
     timerStarted = true;
+
+    // Initialize display immediately
+    timerEl.textContent = `${String(Math.floor(timeLeft / 60)).padStart(2,'0')}:${String(timeLeft % 60).padStart(2,'0')}`;
 
     interval = setInterval(() => {
         timeLeft--;
-
         const minutes = Math.floor(timeLeft / 60);
         const seconds = timeLeft % 60;
 
-        document.getElementById('timer').textContent =
-            `${String(minutes).padStart(2,'0')}:${String(seconds).padStart(2,'0')}`;
+        timerEl.textContent = `${String(minutes).padStart(2,'0')}:${String(seconds).padStart(2,'0')}`;
 
         if (timeLeft <= 0) {
             clearInterval(interval);
-            document.getElementById('timer').textContent = '00:00';
+            timerEl.textContent = '00:00';
         }
     }, 1000);
 }
 
-// start countdown on first click anywhere
+// Start countdown on first click anywhere in the page
 document.addEventListener('click', startTimer, { once: true });
 </script>
     </body>
