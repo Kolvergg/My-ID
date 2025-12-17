@@ -91,10 +91,6 @@ body.slide-down-out {
     width: 100%;
     height: auto;
     display: block;
-}
-       .image-container {
-    position: relative; /* REQUIRED */
-}
 
 #timer {
     position: absolute;
@@ -157,32 +153,16 @@ document.querySelectorAll('a.invisible-button').forEach(link => {
 });
 </script>
 <script>
-let started = false;
-let timeLeft = 120; // seconds
-let timerInterval;
-
-function startTimer() {
-    if (started) return;
-    started = true;
-
-    const timerEl = document.getElementById('timer');
-
-    timerInterval = setInterval(() => {
-        timeLeft--;
-
-        const minutes = String(Math.floor(timeLeft / 60)).padStart(2, '0');
-        const seconds = String(timeLeft % 60).padStart(2, '0');
-
-        timerEl.textContent = `${minutes}:${seconds}`;
-
-        if (timeLeft <= 0) {
-            clearInterval(timerInterval);
-            timerEl.textContent = "00:00";
-        }
-    }, 1000);
-}
-
-document.addEventListener('click', startTimer);
+// Countdown timer logic
+let time = 120; // seconds
+const timerEl = document.getElementById('timer');
+const interval = setInterval(() => {
+    const minutes = String(Math.floor(time / 60)).padStart(2,'0');
+    const seconds = String(time % 60).padStart(2,'0');
+    timerEl.textContent = `${minutes}:${seconds}`;
+    if (time === 0) clearInterval(interval);
+    time--;
+}, 1000);
 </script>
     </body>
     </html>
