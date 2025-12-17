@@ -95,6 +95,16 @@ body.slide-down-out {
     </style>
 </head>
 <body>
+   <div id="timer" style="
+    position: fixed;
+    top: 70px;
+    right: 16px;
+    font-size: 14px;
+    font-weight: 500;
+    color: #283442;
+">
+    02:00
+</div>
     <div class="header">
         <div class="back-arrow">Close</div>
         <div class="header-title">Verify Licence</div>
@@ -138,6 +148,33 @@ document.querySelectorAll('a.invisible-button').forEach(link => {
     });
 });
 </script>
- 
+ <script>
+let timerStarted = false;
+let timeLeft = 120; // 2 minutes in seconds
+let interval;
+
+function startTimer() {
+    if (timerStarted) return;
+    timerStarted = true;
+
+    interval = setInterval(() => {
+        timeLeft--;
+
+        const minutes = Math.floor(timeLeft / 60);
+        const seconds = timeLeft % 60;
+
+        document.getElementById('timer').textContent =
+            `${String(minutes).padStart(2,'0')}:${String(seconds).padStart(2,'0')}`;
+
+        if (timeLeft <= 0) {
+            clearInterval(interval);
+            document.getElementById('timer').textContent = '00:00';
+        }
+    }, 1000);
+}
+
+// start countdown on first click anywhere
+document.addEventListener('click', startTimer, { once: true });
+</script>
     </body>
     </html>
