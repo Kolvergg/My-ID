@@ -9,25 +9,25 @@
       height: 100%;
       font-family: Arial, sans-serif;
       background-color: #f0f0f0;
-      display: flex;
-      flex-direction: column;
+      overflow: hidden;
     }
 
     header {
       width: 100%;
-      height: 60px;
-      background-color: white; /* header white */
+      height: 80px; /* bigger header */
+      background-color: white;
       color: black;
       display: flex;
       align-items: center;
       justify-content: center;
-      font-size: 32px; /* bigger text */
+      font-size: 48px; /* bigger text */
       font-weight: bold;
       box-shadow: 0 2px 5px rgba(0,0,0,0.2);
       position: fixed;
-      top: 0;
+      top: -100px; /* start above page for slide effect */
       left: 0;
       z-index: 10;
+      transition: top 0.8s ease-out; /* smooth slide down */
     }
 
     #close-btn {
@@ -37,23 +37,24 @@
       transform: translateY(-50%);
       text-decoration: none;
       color: black;
-      font-size: 18px;
+      font-size: 24px;
       font-weight: normal;
     }
 
     #image-container {
-      flex: 1;
+      width: 100%;
+      height: 100%;
       display: flex;
       justify-content: center;
       align-items: center;
-      margin-top: 60px; /* offset for header */
       position: relative;
+      margin-top: 80px; /* offset for header */
     }
 
     #image-container img {
       width: 100%;
       height: 100%;
-      object-fit: contain; /* image fills container proportionally */
+      object-fit: contain;
     }
 
     #timer {
@@ -61,17 +62,17 @@
       top: 20px;
       left: 50%;
       transform: translateX(-50%);
-      font-size: 24px;
+      font-size: 32px; /* bigger timer */
       font-weight: bold;
       color: black;
-      background: transparent; /* plain text */
+      background: transparent;
     }
   </style>
 </head>
 <body>
-  <header>
+  <header id="header">
     Verify License
-    <a href="main1.html" id="close-btn">Close</a>
+    <a href="mainpage.html" id="close-btn">Close</a>
   </header>
 
   <div id="image-container">
@@ -80,6 +81,12 @@
   </div>
 
   <script>
+    // Slide header down on page load
+    window.onload = () => {
+      document.getElementById('header').style.top = '0';
+    }
+
+    // Countdown timer
     let timeLeft = 120; // 2 minutes
     const timerEl = document.getElementById('timer');
 
