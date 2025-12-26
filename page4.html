@@ -12,13 +12,11 @@
   }
 
   html, body {
-    width: 100%;
-    height: 100%;
-    overflow: hidden; /* no scrolling */
-    font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+    margin: 0;
+    padding: 0;
+    overflow: hidden; /* no scrolling at all */
     background: white;
-  }
-
+}
   /* Slide-in animation for the whole page */
   #page-wrapper {
     width: 100%;
@@ -82,19 +80,14 @@
   }
 
   .image-container {
-    width: 100%;
-    height: 100%;
-    position: relative;
-  }
-
-  .image-container img {
-    width: 100%;
-    height: 100%;
-    object-fit: contain; /* ensures full image is visible */
-    display: block;
-    background: white; /* fills empty space if aspect ratio differs */
+    width: 100vw;
 }
 
+.image-container img {
+    width: 100vw;
+    height: auto;      /* THIS is the important line */
+    display: block;
+}
   .invisible-button {
     position: absolute;
     cursor: pointer;
@@ -172,4 +165,5 @@
 
 </body>
 </html>
+
 
