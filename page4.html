@@ -19,10 +19,6 @@
 html, body {
     height: 100%;
     width: 100%;
-    overflow: hidden;
-
-    touch-action: none;
-    overscroll-behavior: none;
 
     -webkit-user-select: none;
     -webkit-touch-callout: none;
@@ -180,21 +176,28 @@ html, body {
 </script>
 <script>
 (function () {
-    document.addEventListener('touchstart', e => {
-        if (e.touches.length > 1) e.preventDefault();
-    }, { passive: false });
+  // Kill pinch zoom
+  document.addEventListener('touchstart', function (e) {
+    if (e.touches.length > 1) {
+      e.preventDefault();
+    }
+  }, { passive: false });
 
-    document.addEventListener('touchmove', e => {
-        if (e.scale && e.scale !== 1) e.preventDefault();
-    }, { passive: false });
-
-    document.addEventListener('gesturestart', e => e.preventDefault());
-    document.addEventListener('gesturechange', e => e.preventDefault());
-    document.addEventListener('gestureend', e => e.preventDefault());
+  // Kill gesture zoom (iOS)
+  document.addEventListener('gesturestart', function (e) {
+    e.preventDefault();
+  });
+  document.addEventListener('gesturechange', function (e) {
+    e.preventDefault();
+  });
+  document.addEventListener('gestureend', function (e) {
+    e.preventDefault();
+  });
 })();
 </script>
 </body>
 </html>
+
 
 
 
