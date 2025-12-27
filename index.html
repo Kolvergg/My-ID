@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no, viewport-fit=cover">
 <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     
@@ -18,7 +19,9 @@
     overflow-x: hidden;
     overflow-y: auto; /* ensure vertical scroll is allowed */
 }
-
+html, body {
+  touch-action: pan-x pan-y;
+}
         .image-container {
             width: 100%;
             position: relative;
@@ -92,6 +95,17 @@ document.querySelectorAll('a').forEach(link => {
             window.location.href = href;
         }, 500); // must match transition duration
     });
+});
+</script>
+    <script>
+document.addEventListener('gesturestart', function (e) {
+  e.preventDefault();
+});
+document.addEventListener('gesturechange', function (e) {
+  e.preventDefault();
+});
+document.addEventListener('gestureend', function (e) {
+  e.preventDefault();
 });
 </script>
 </body>
